@@ -1,0 +1,196 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-primary-50: #f0fdf4;
+  --color-primary-100: #dcfce7;
+  --color-primary-200: #bbf7d0;
+  --color-primary-300: #86efac;
+  --color-primary-400: #4ade80;
+  --color-primary-500: #22c55e;
+  --color-primary-600: #16a34a;
+  --color-primary-700: #15803d;
+  --color-primary-800: #166534;
+  --color-primary-900: #14532d;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Manrope', 'Inter', system-ui, sans-serif;
+
+  --radius-xl: 1.125rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.5rem;
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply min-h-screen text-zinc-900 antialiased;
+    font-family: var(--font-sans);
+    background: #f6f8f7;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    @apply tracking-tight text-zinc-900;
+  }
+}
+
+@layer components {
+  .app-shell {
+    @apply relative min-h-screen;
+  }
+
+  .app-shell::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    background:
+      radial-gradient(ellipse 80% 50% at 20% -10%, rgb(187 247 208 / 0.45), transparent 55%),
+      radial-gradient(ellipse 60% 45% at 100% 0%, rgb(191 219 254 / 0.35), transparent 50%),
+      radial-gradient(ellipse 70% 50% at 50% 100%, rgb(228 228 231 / 0.4), transparent 55%),
+      linear-gradient(180deg, #f8faf9 0%, #f1f5f3 45%, #eef2f0 100%);
+    pointer-events: none;
+  }
+
+  .app-shell::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    opacity: 0.035;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .glass-panel {
+    @apply rounded-3xl border border-white/80 bg-white/65 shadow-[0_8px_32px_-8px_rgba(15,23,42,0.12),0_2px_8px_-2px_rgba(15,23,42,0.06)] backdrop-blur-2xl;
+  }
+
+  .glass-panel-strong {
+    @apply rounded-3xl border border-white/90 bg-white/78 shadow-[0_16px_48px_-12px_rgba(15,23,42,0.14),0_4px_12px_-4px_rgba(15,23,42,0.08)] backdrop-blur-3xl;
+  }
+
+  .surface-card {
+    @apply rounded-3xl border border-zinc-200/70 bg-white/90 shadow-[0_4px_24px_-6px_rgba(15,23,42,0.08),0_1px_3px_rgba(15,23,42,0.04)] backdrop-blur-sm;
+  }
+
+  .premium-card {
+    @apply relative overflow-hidden rounded-3xl border border-white/70 bg-white/72 shadow-[0_8px_40px_-12px_rgba(15,23,42,0.12)] backdrop-blur-2xl;
+  }
+
+  .premium-card::before {
+    content: '';
+    @apply pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent;
+  }
+
+  .input-field {
+    @apply block w-full rounded-2xl border border-zinc-200/80 bg-white/80 px-4 py-3 text-sm text-zinc-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] backdrop-blur-sm transition-[border-color,box-shadow,background-color] duration-200 placeholder:text-zinc-400 focus:border-primary-400/80 focus:bg-white focus:outline-none focus:ring-4 focus:ring-primary-500/10 disabled:cursor-not-allowed disabled:bg-zinc-100/80 disabled:opacity-60;
+  }
+
+  .input-floating {
+    @apply block w-full rounded-2xl border border-zinc-200/80 bg-white/80 px-4 pb-2.5 pt-6 text-sm text-zinc-900 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] backdrop-blur-sm transition-[border-color,box-shadow,background-color] duration-200 focus:border-primary-400/80 focus:bg-white focus:outline-none focus:ring-4 focus:ring-primary-500/10 disabled:cursor-not-allowed disabled:bg-zinc-100/80;
+  }
+
+  .nav-pill {
+    @apply rounded-2xl border border-white/70 bg-white/72 shadow-[0_8px_32px_-8px_rgba(15,23,42,0.14),0_2px_8px_-2px_rgba(15,23,42,0.06)] backdrop-blur-2xl;
+  }
+
+  .section-title {
+    @apply font-display text-lg font-bold tracking-tight text-zinc-900 sm:text-xl;
+  }
+
+  .skeleton-shimmer {
+    @apply rounded-2xl bg-gradient-to-r from-zinc-200/80 via-zinc-100/90 to-zinc-200/80 bg-[length:200%_100%];
+    animation: shimmer 1.8s ease-in-out infinite;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-600 bg-clip-text text-transparent;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-shimmer {
+    animation: none;
+  }
+}
+
+.homeplant-calendar .react-calendar {
+  width: 100%;
+  max-width: 100%;
+  border: none;
+  font-family: inherit;
+  line-height: 1.25;
+  background: transparent;
+}
+
+.homeplant-calendar .react-calendar__navigation button {
+  min-width: 44px;
+  background: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+  color: #18181b;
+  border-radius: 1rem;
+}
+
+.homeplant-calendar .react-calendar__navigation button:enabled:hover,
+.homeplant-calendar .react-calendar__navigation button:enabled:focus {
+  background: rgb(240 253 244 / 0.85);
+}
+
+.homeplant-calendar .react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #71717a;
+}
+
+.homeplant-calendar .react-calendar__tile {
+  min-height: 5rem;
+  padding: 0.375rem;
+  background: none;
+  font-size: 0.875rem;
+  border-radius: 1rem;
+}
+
+.homeplant-calendar .react-calendar__tile:enabled:hover,
+.homeplant-calendar .react-calendar__tile:enabled:focus {
+  background: rgb(240 253 244 / 0.9);
+}
+
+.homeplant-calendar .react-calendar__tile--now {
+  background: rgb(236 253 245 / 0.95);
+  font-weight: 700;
+  box-shadow: inset 0 0 0 1px rgb(34 197 94 / 0.25);
+}
+
+.homeplant-calendar .react-calendar__tile--active {
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  color: white;
+  box-shadow: 0 8px 24px rgb(22 163 74 / 0.28);
+}
+
+.homeplant-calendar .react-calendar__tile--active:enabled:hover,
+.homeplant-calendar .react-calendar__tile--active:enabled:focus {
+  background: linear-gradient(135deg, #15803d, #16a34a);
+}
