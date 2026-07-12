@@ -48,7 +48,6 @@ export default function DashboardPage() {
       setTogglingFavoriteId(null)
     }
   }
-
   return (
     <>
       <PageHeader
